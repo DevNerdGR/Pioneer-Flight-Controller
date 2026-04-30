@@ -1,6 +1,8 @@
 # Pioneer Experimental Flight Controller
 Experimental flight controller for RP2040, written in pure C using the [Raspberry Pi Pico SDK](https://github.com/raspberrypi/pico-sdk).
->[!NOTE] This is a side project and is still work in progress!
+> [!NOTE]
+> This is a side project and is still a work in progress! Rate of progress will hence be variable.
+
 ## Current features
 - Radio link using the ELRS protocol
 - GPS functionality
@@ -13,9 +15,12 @@ The main development board used is the Raspberry Pi Pico W (first generation). A
 ## Why?
 There are many excellent flight controllers out there, and I'm doing this mainly for fun, but also to practice my C skills.
 
-I have chosen to not use libraries for interfacing with the peripherals, and instead elected to implement stuff from scratch by referencing datasheets and protocol documentations
+I have chosen to not use libraries for interfacing with the peripherals, and instead implement stuff from scratch by referencing datasheets and protocol documentations. This makes the process more interesting!
+
+The RP2040 was chosen because it was just what I had lying around.
 
 ## References
+Here are some important references I used.
 1. CRSF protocol specfications: https://github.com/tbs-fpv/tbs-crsf-spec/blob/main/crsf.md
 2. GY-NEO6MV2 UART protocol specifications: https://content.u-blox.com/sites/default/files/products/documents/u-blox6_ReceiverDescrProtSpec_%28GPS.G6-SW-10018%29_Public.pdf
 3. NEO-6 datasheet: https://content.u-blox.com/sites/default/files/products/documents/NEO-6_DataSheet_%28GPS.G6-HW-09005%29.pdf
