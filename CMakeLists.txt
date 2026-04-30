@@ -35,13 +35,13 @@ pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
 
-add_executable(PioneerEFC PioneerEFC.c rx.c command.c)
+add_executable(PioneerEFC PioneerEFC.c rx.c command.c gps.c)
 
 pico_set_program_name(PioneerEFC "PioneerEFC")
 pico_set_program_version(PioneerEFC "0.1")
 
 # Modify the below lines to enable/disable output over UART/USB
-pico_enable_stdio_uart(PioneerEFC 0)
+#pico_enable_stdio_uart(PioneerEFC 0)
 pico_enable_stdio_usb(PioneerEFC 1)
 
 # Add the standard library to the build

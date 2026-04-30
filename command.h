@@ -38,13 +38,13 @@ typedef struct {
 } CommandPacket;
 
 /**
- * Parses a Frame from the RX to channels format (CommandPacket)
+ * Parses a RxFrame from the RX to channels format (CommandPacket)
  * \return `true` if successful, `false` otherwise
  */
-bool parse_command_frame(Frame* f, CommandPacket* cp);
+bool parse_command_frame(RxFrame* f, CommandPacket* cp);
 
 /**
- * Pretty printing of a command packet
+ * Pretty printing of a command packet.
  */
 void print_command_packet(CommandPacket* cp);
 #endif

@@ -23,10 +23,10 @@ unsigned char crc8tab[256] = {
     0x84, 0x51, 0xFB, 0x2E, 0x7A, 0xAF, 0x05, 0xD0, 0xAD, 0x78, 0xD2, 0x07, 0x53, 0x86, 0x2C, 0xF9};
 
 
-void init_radio_rx() {
-    uart_init(UART_ID, BAUD_RATE);
-    gpio_set_function(UART_TX_PIN, GPIO_FUNC_UART);
-    gpio_set_function(UART_RX_PIN, GPIO_FUNC_UART);
+void rx_init_radio() {
+    uart_init(UART_ID_RX, BAUD_RATE_RX);
+    gpio_set_function(UART_TX_PIN_RX, GPIO_FUNC_UART);
+    gpio_set_function(UART_RX_PIN_RX, GPIO_FUNC_UART);
 }
 
 uint8_t crc8(const uint8_t * ptr, uint8_t len) {
@@ -36,30 +36,30 @@ uint8_t crc8(const uint8_t * ptr, uint8_t len) {
     return crc;
 }
 
-bool read_frame(Frame* f) {
+bool rx_read_frame(RxFrame* f) {
     do {
-        if (!uart_is_readable_within_us(UART_ID, TIMEOUT)) return false;
-        f->syncByte = uart_getc(UART_ID);
-    } while (f->syncByte != SERIAL_SYNC_BYTE);
+        if (!uart_is_readable_within_us(UART_ID_RX, TIMEOUT_RX)) return false;
+        f->syncByte = uart_getc(UART_ID_RX);
+    } while (f->syncByte != SERIAL_SYNC_BYTE_RX);
     
-    if (!uart_is_readable_within_us(UART_ID, TIMEOUT)) return false;
-    f->frameLen = uart_getc(UART_ID);
+    if (!uart_is_readable_within_us(UART_ID_RX, TIMEOUT_RX)) return false;
+    f->frameLen = uart_getc(UART_ID_RX);
 
-    if (!uart_is_readable_within_us(UART_ID, TIMEOUT)) return false;
-    f->type = uart_getc(UART_ID);
+    if (!uart_is_readable_within_us(UART_ID_RX, TIMEOUT_RX)) return false;
+    f->type = uart_getc(UART_ID_RX);
 
     for (uint8_t i = 0; i < (f->frameLen - 1); i++) {
-        if (!uart_is_readable_within_us(UART_ID, TIMEOUT)) return false;
-        f->payload[i] = uart_getc(UART_ID);
+        if (!uart_is_readable_within_us(UART_ID_RX, TIMEOUT_RX)) return false;
+        f->payload[i] = uart_getc(UART_ID_RX);
     }
     uint8_t calculatedCrc = crc8(&(f->type), f->frameLen - 1);
     return (calculatedCrc == f->payload[f->frameLen - 2]);
 }
 
-void print_frame(Frame* f) {
-    printf("CRSF Frame\n");
+void rx_print_frame(RxFrame* f) {
+    printf("CRSF RxFrame\n");
     printf("Sync byte:\t%02x\n", f->syncByte);
-    printf("Frame len:\t%02x\n", f->frameLen);
+    printf("RxFrame len:\t%02x\n", f->frameLen);
     printf("Type:\t%02x\n", f->type);
     printf("Payload:\t");
     for (uint8_t i = 0; i < f->frameLen - 2; i++) {

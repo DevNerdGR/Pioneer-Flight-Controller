@@ -2,7 +2,7 @@
 #include "pico/stdlib.h"
 #include <stdio.h>
 
-bool parse_command_frame(Frame* f, CommandPacket* cp) {
+bool parse_command_frame(RxFrame* f, CommandPacket* cp) {
     if (f->type != PACKET_TYPE_RC_CHANNEL) return false;
     /**
      * Bit mask:
@@ -39,5 +39,5 @@ void print_command_packet(CommandPacket* cp) {
     printf("Channel\t01\t02\t03\t04\t05\t06\t07\t08\t09\t10\t11\t12\t13\t14\t15\t16\n");
     printf("Value\t%02d\t%02d\t%02d\t%02d\t%02d\t%02d\t%02d\t%02d\t%02d\t%02d\t%02d\t%02d\t%02d\t%02d\t%02d\t%02d\n", 
         cp->channel_01, cp->channel_02, cp->channel_03, cp->channel_04, cp->channel_05, cp->channel_06, cp->channel_07, cp->channel_08, 
-        cp->channel_09, cp->channel_10, cp->channel_11, cp->channel_12, cp->channel_13, cp->channel_14, cp->channel_15, cp->channel_16);
+        cp->channel_09, cp->channel_10, cp->channel_11, cp->channel_12, cp->channel_13, cp->channel_14, cp->channel_15, cp->channel_16);   
 }
