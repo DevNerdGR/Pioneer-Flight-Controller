@@ -12,6 +12,9 @@ The main development board used is the Raspberry Pi Pico W (first generation). A
 - ELRS receiver
 - GY-NEO6MV2 GPS module
 
+Here's how the whole set up currently looks like:
+![progress](images/IMG20260501013257.jpg)
+
 ## Why?
 There are many excellent flight controllers out there, and I'm doing this mainly for fun, but also to practice my C skills.
 
