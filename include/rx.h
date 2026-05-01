@@ -4,12 +4,6 @@
 #ifndef RX_H
 #define RX_H
 
-#define BAUD_RATE_RX 420000
-#define UART_ID_RX uart1
-#define UART_TX_PIN_RX 4
-#define UART_RX_PIN_RX 5
-#define TIMEOUT_RX 10
-#define SERIAL_SYNC_BYTE_RX 0xC8
 
 #ifndef MAX
 #define MAX(a,b) ((a) > (b) ? (a) : (b))

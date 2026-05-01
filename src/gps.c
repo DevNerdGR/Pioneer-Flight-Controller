@@ -6,6 +6,14 @@
 #include "pico/stdlib.h"
 #include "hardware/uart.h"
 
+#define BAUD_RATE_GPS 9600
+#define UART_ID_GPS uart0
+#define UART_TX_PIN_GPS 12
+#define UART_RX_PIN_GPS 13
+#define TIMEOUT_GPS 5000
+#define SERIAL_SYNC_BYTE_GPS '$'
+#define DATA_BUF_SIZE_GPS 128
+
 uint8_t calcChecksum(char* data) {
     uint8_t cs = data[0];
     uint8_t len = strlen(data);

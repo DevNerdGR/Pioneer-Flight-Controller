@@ -2,6 +2,10 @@
 #include "pico/stdlib.h"
 #include <stdio.h>
 
+#define PACKET_TYPE_RC_CHANNEL 0x16
+#define NORM_OFFSET 50
+#define NORM_SCALE  1000 / (1800 - 170) // 1000 / (max - min)
+
 bool parse_command_frame(RxFrame* f, CommandPacket* cp) {
     if (f->type != PACKET_TYPE_RC_CHANNEL) return false;
     /**

@@ -34,8 +34,15 @@ project(PioneerEFC C CXX ASM)
 pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
-
-add_executable(PioneerEFC PioneerEFC.c rx.c command.c gps.c)
+add_executable(
+    PioneerEFC 
+    PioneerEFC.c 
+    src/rx.c 
+    src/command.c 
+    src/gps.c 
+    src/telemetry/plotter.c 
+    src/imu.c
+)
 
 pico_set_program_name(PioneerEFC "PioneerEFC")
 pico_set_program_version(PioneerEFC "0.1")
@@ -45,18 +52,25 @@ pico_set_program_version(PioneerEFC "0.1")
 pico_enable_stdio_usb(PioneerEFC 1)
 
 # Add the standard library to the build
-target_link_libraries(PioneerEFC
-        pico_stdlib)
+target_link_libraries(
+    PioneerEFC
+    pico_stdlib
+
+)
 
 # Add the standard include files to the build
 target_include_directories(PioneerEFC PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}
+        ${CMAKE_CURRENT_LIST_DIR}/include
+        ${CMAKE_CURRENT_LIST_DIR}/tests/include
 )
 
 # Add any user requested libraries
-target_link_libraries(PioneerEFC 
-        pico_cyw43_arch_none
-        )
+target_link_libraries(
+    PioneerEFC 
+    pico_cyw43_arch_none
+    hardware_i2c
+    )
 
 pico_add_extra_outputs(PioneerEFC)
 

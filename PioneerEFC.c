@@ -4,6 +4,8 @@
 #include "rx.h"
 #include "command.h"
 #include "gps.h"
+#include "plotter.h"
+
 
 void init() {
     stdio_init_all();
@@ -13,7 +15,10 @@ void init() {
 }
 
 int main() {
+
     init();
+
+
 
     while (true) {
         RxFrame f;
@@ -23,10 +28,9 @@ int main() {
             cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, cp.channel_03 > COMMAND_HIGH_THRESH);
         }
 
-        GpsFrame g;
-        if (gps_read_frame(&g)) {
-            gps_print_gga_frame(&g);
-        }
+        GpsFrame g;        
+        cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, gps_read_frame(&g));
+
 
         sleep_ms(10);
     }
